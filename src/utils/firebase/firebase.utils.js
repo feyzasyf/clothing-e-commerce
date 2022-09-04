@@ -7,6 +7,7 @@ import {getAuth,
      signInWithEmailAndPassword,
      signOut,
      onAuthStateChanged,
+     
     } from 'firebase/auth';
 
     import {
@@ -14,6 +15,10 @@ import {getAuth,
         doc,
         getDoc,
         setDoc,
+        collection,
+        writeBatch,
+        query,
+        getDocs,
 
     } from 'firebase/firestore'
 
@@ -51,6 +56,44 @@ const firebaseConfig = {
   
   
   export const db= getFirestore();
+
+  // upload data to respective collection up in firestore
+
+export const addCollectionAndDocuments = async(collectionKey, objectsToAdd)=>{
+    const collectionRef = collection(db, collectionKey);
+    // upload ina  batch to uplaod all data in one successful "transaction"
+    const batch = writeBatch(db)
+  // // batch instance
+  // create and set onject şnto collection as a document
+
+  objectsToAdd.forEach((object)=>{
+    const docRef= doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+  await batch.commit();
+  console.log("done");
+};
+
+export const getCategoriesAndDocuments=async()=>{
+  const collectionRef = collection(db, 'categories');
+
+  // generate a query off of collectionRef, I can get an object
+  //  that I can get a snapshot from
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  // now we can access different document snapshots
+  const categoryMap =querySnapshot.docs.reduce((acc, docSnapshot)=>{
+      const { title, items } = docSnapshot.data();
+      acc[title.toLowerCase()]= items;
+      return acc;
+  }, {});
+  return categoryMap;
+}
+
+
+
+
   export const createUserDocumentFromAuth = async(userAuth, additionalInformation={}) =>{
         const userDocRef = doc(db, 'users', userAuth.uid );
         console.log(userDocRef);
@@ -98,3 +141,5 @@ const firebaseConfig = {
 
   export const onAuthStateChangedListener =(callback)=> onAuthStateChanged(auth,callback);
   
+
+
