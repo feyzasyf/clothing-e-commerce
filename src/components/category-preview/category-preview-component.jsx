@@ -1,10 +1,11 @@
 import ProductCard from "../product-card/product-card.component";
-import "./category-preview.styles.scss"
+
+import { CategoryPreviewWrapper } from "./category-preview.styles.jsx";
 
 
 const CategoryPreview =({title, products})=>{
     return(
-        <div className="category-preview-container">
+        <CategoryPreviewWrapper>
             <h2>
                 <span className="title">{title.toUpperCase()}</span>
             </h2>
@@ -15,7 +16,7 @@ const CategoryPreview =({title, products})=>{
             }
 
             </div>
-        </div>
+        </CategoryPreviewWrapper>
     )
 
 }

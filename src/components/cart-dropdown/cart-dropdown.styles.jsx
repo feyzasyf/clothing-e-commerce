@@ -1,4 +1,11 @@
-.cart-dropdown-container {
+
+import styled from "styled-components";
+import {BaseButton, 
+  GoogleSignInButton, 
+  InvertedButton} from '../button/button.styles'
+
+export const CartDropdownWrapper = styled.div`
+
     position: absolute;
     width: 240px;
     height: 340px;
@@ -23,8 +30,10 @@
       overflow: scroll;
     }
   
-    button {
+   ${BaseButton}, 
+  ${GoogleSignInButton}, 
+  ${InvertedButton}{
       margin-top: auto;
     }
-  }
+  `
   

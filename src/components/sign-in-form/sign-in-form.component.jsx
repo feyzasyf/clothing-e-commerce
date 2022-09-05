@@ -1,9 +1,9 @@
 
 import { useState } from "react";
 import FormInput from "../form-input/form-input.components";
-import Button from "../button/button.component";
+import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
 import { signInAuthUserWithEmailAndPassword, signInWithGooglePopup} from "../../utils/firebase/firebase.utils";
-import './sign-in-form.styles.scss';
+import {SignInFormWrapper} from './sign-in-form.styles.jsx';
 // import { UserContext } from "../../context/user.context";
 
 const defaultFormFields= {      
@@ -68,7 +68,7 @@ const SignInForm =()=>{
 
 
 return (
-<div className="sign-up-container">
+<SignInFormWrapper>
 <h6>Already have an account?</h6>
 <span>Sign In with your email and password</span>
 <form onSubmit={handleSubmit}>
@@ -91,10 +91,10 @@ return (
                
 <div className="buttons-container">
 <Button type="submit">Sign In</Button>
-<Button  type="button" buttonType="google"onClick={signInWithGoogle}>Google Sign In</Button>
+<Button  buttonType={BUTTON_TYPE_CLASSES.google} type="button" onClick={signInWithGoogle}>Google Sign In</Button>
 </div>
 </form>
-</div>
+</SignInFormWrapper>
 )
 
 

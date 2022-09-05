@@ -1,4 +1,4 @@
-import "./checkout.styles.scss";
+import {CheckoutWrapper} from "./checkout.styles.jsx";
 import { useContext } from "react";
 import { CartContext } from '../../context/cart.contex';
 import CheckoutItem from "../../components/checkout-item/checkout-item";
@@ -22,7 +22,7 @@ const Checkout =()=>{
  
 
 return(
-    <div className="checkout-container">
+    <CheckoutWrapper>
     <div className="checkout-header">
         <div className="header-block">
             <span>Product</span>
@@ -51,7 +51,7 @@ return(
     }
     
     <span className="total">TOTAL : {total}</span>
-    </div>
+    </CheckoutWrapper>
     );
    
    

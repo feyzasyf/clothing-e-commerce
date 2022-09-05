@@ -3,7 +3,7 @@ import { useState } from "react";
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.components";
-import "./sign-up-form.styles.scss";
+import {SignUpFormWrapper} from "./sign-up-form.styles.jsx";
 // import { UserContext } from "../../context/user.context";
 
 const defaultFormFields= {   
@@ -21,7 +21,6 @@ const {displayName,email,password,confirmPassword} = formFields;
 
 
 
-console.log(formFields);
  const resetFormFields=()=>{
     setFormFields(defaultFormFields);
  }
@@ -60,7 +59,7 @@ const handleChange =(e)=>{
 }
 
     return (
-        <div className="sign-up-container">
+        <SignUpFormWrapper>
         <h2>Don't have an account?</h2>
             <span>SignUp with your email and password</span>
             <form onSubmit={handleSubmit}>
@@ -106,7 +105,7 @@ const handleChange =(e)=>{
             
             <Button  type="submit">Sign Up</Button>
             </form>
-        </div>
+        </SignUpFormWrapper>
     )
 }
 

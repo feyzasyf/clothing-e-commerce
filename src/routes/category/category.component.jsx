@@ -1,4 +1,4 @@
-import "./category.styles.scss";
+import {CategoryWrapper} from "./category.styles.jsx";
 import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { CategoriesContext } from "../../context/categories.context";
@@ -15,10 +15,10 @@ useEffect(()=>{
 },[category, categoriesMap])
 
 return(
-    <div className="category-container">
+    <CategoryWrapper>
      {  products && products.map((product)=> <ProductCard key={product.id} product={product} />)
      }
-    </div>
+    </CategoryWrapper>
 )
 
 }
