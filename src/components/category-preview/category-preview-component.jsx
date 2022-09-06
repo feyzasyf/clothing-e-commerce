@@ -1,4 +1,5 @@
 import ProductCard from "../product-card/product-card.component";
+import {Link} from "react-router-dom";
 
 import { CategoryPreviewWrapper } from "./category-preview.styles.jsx";
 
@@ -7,7 +8,8 @@ const CategoryPreview =({title, products})=>{
     return(
         <CategoryPreviewWrapper>
             <h2>
-                <span className="title">{title.toUpperCase()}</span>
+            <Link to={title}><span className="title">{title.toUpperCase()}</span></Link>
+                
             </h2>
             <div className="preview">
             {
