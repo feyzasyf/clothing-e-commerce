@@ -50,7 +50,7 @@ return(
 
     }
     
-    <span className="total">TOTAL : {total}</span>
+    <span className="total">TOTAL : ${total}</span>
     </CheckoutWrapper>
     );
    
