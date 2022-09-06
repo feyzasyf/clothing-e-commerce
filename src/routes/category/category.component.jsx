@@ -16,7 +16,7 @@ useEffect(()=>{
 
 return(
     <Fragment>
-    <Title>{Category.toUpperCase()}</Title>
+    <Title>{category.toUpperCase()}</Title>
     <CategoryWrapper>
      {  products && products.map((product)=> <ProductCard key={product.id} product={product} />)
      }
