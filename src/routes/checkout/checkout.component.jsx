@@ -6,17 +6,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 const Checkout =()=>{
-    const {cartItems} = useContext(CartContext);
-    const [total, setTotal] = useState(0);
+    const {cartItems, cartTotal} = useContext(CartContext);
+ 
 
-    useEffect(()=>{
-        const cartTotal = cartItems.reduce((acc, cartItem)=>{
-          return( acc+ (cartItem.price * cartItem.quantity));
-        }, 0);
-        setTotal(cartTotal);
-
-    },[cartItems])
-
+ 
   
 
  
@@ -50,7 +43,7 @@ return(
 
     }
     
-    <span className="total">TOTAL : ${total}</span>
+    <span className="total">TOTAL : ${cartTotal}</span>
     </CheckoutWrapper>
     );
    
