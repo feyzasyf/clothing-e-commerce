@@ -1,17 +1,17 @@
 
 import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component"
-
-import { useContext } from 'react';
-import { CartContext } from '../../context/cart.contex';
 import { ProductCardWrapper } from './product-card.styles.jsx';
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../../store/cart/cartSlice";
 
 const ProductCard =({product})=>{
 
 const {name,price, imageUrl}  = product;
-const {addItemToCart} = useContext(CartContext);
+const dispatch = useDispatch();
+
 const addProductToCart=()=>{
     console.log("Add to Cart function is being called")
-    addItemToCart(product);
+    dispatch(addItemToCart(product));
 }
 
 

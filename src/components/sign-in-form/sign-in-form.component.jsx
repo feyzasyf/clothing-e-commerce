@@ -4,26 +4,27 @@ import FormInput from "../form-input/form-input.components";
 import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
 import { signInAuthUserWithEmailAndPassword, signInWithGooglePopup} from "../../utils/firebase/firebase.utils";
 import {SignInFormWrapper} from './sign-in-form.styles.jsx';
-// import { UserContext } from "../../context/user.context";
+import { useNavigate } from "react-router-dom";
+
 
 const defaultFormFields= {      
     email: '',
     password: '',   
 }
 const SignInForm =()=>{
-
+  const navigate= useNavigate();
     const [formFields, setFormFields] = useState(defaultFormFields);
     const {email,password} = formFields;
     
-  // const {setCurrentUser} = useContext(UserContext)
+
      const resetFormFields=()=>{
         setFormFields(defaultFormFields);
      };
 
      const signInWithGoogle=async()=>{
        await signInWithGooglePopup();
-        // setCurrentUser(user);
-        // await createUserDocumentFromAuth(user);
+
+       navigate("/");
 
     };
   
@@ -35,8 +36,10 @@ const SignInForm =()=>{
          
         try {
           const {user}= await signInAuthUserWithEmailAndPassword(email,password);
-        //  setCurrentUser(user);
+
+         
             resetFormFields();
+            navigate("/");
         } catch (error) {
             console.log(error.code)
             switch(error.code){
