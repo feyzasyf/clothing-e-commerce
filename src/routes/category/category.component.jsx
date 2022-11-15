@@ -1,31 +1,39 @@
-import {CategoryWrapper, Title} from "./category.styles.jsx";
+import { CategoryWrapper, Title } from "./category.styles.jsx";
 import { useState, useEffect, Fragment } from "react";
 import { useParams } from "react-router-dom";
-
 import ProductCard from "../../components/product-card/product-card.component";
-import { selectCategoriesMap} from "../../store/categories/categories.selector.js";
+import {
+  selectCategoriesIsLoading,
+  selectCategoriesMap,
+} from "../../store/categories/categories.selector.js";
 import { useSelector } from "react-redux";
+import Spinner from "../../components/spinner/spinner.component";
 
+const Category = () => {
+  const { category } = useParams();
+  const isLoading = useSelector(selectCategoriesIsLoading);
+  const categoriesMap = useSelector(selectCategoriesMap);
 
-const Category =()=>{
- const {category} = useParams();
- const categoriesMap = useSelector(selectCategoriesMap);
+  const [products, setProducts] = useState(categoriesMap[category]);
 
-const [products, setProducts] = useState(categoriesMap[category]);
+  useEffect(() => {
+    setProducts(categoriesMap[category]);
+  }, [category, categoriesMap]);
 
-useEffect(()=>{
-    setProducts(categoriesMap[category])
-},[category, categoriesMap])
-
-return(
+  return (
     <Fragment>
-    <Title>{category.toUpperCase()}</Title>
-    <CategoryWrapper>
-     {  products && products.map((product)=> <ProductCard key={product.id} product={product} />)
-     }
-    </CategoryWrapper>
+      <Title>{category.toUpperCase()}</Title>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <CategoryWrapper>
+          {products &&
+            products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+        </CategoryWrapper>
+      )}
     </Fragment>
-)
-
-}
+  );
+};
 export default Category;
